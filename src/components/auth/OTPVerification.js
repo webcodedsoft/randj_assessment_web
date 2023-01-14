@@ -13,7 +13,7 @@ export default function OTPVerification() {
 
 const [user] = useAuthState(auth);
  const [value, loading] = useDocument(
-    doc(getFirestore(app), 'users', user && user.uid),
+    doc(getFirestore(app), 'users', user && (user || {}).uid),
     {
       snapshotListenOptions: { includeMetadataChanges: true },
     }
@@ -23,7 +23,7 @@ const [user] = useAuthState(auth);
     e.preventDefault();
     const userOTP = value.data().otp;
     if (userOTP === Number(otp)) {
-      await verifyOTP(user.uid);
+      await verifyOTP((user || {}).uid);
       navigate("/dashboard")
     } else {
       toast.error("Invalid OTP");

@@ -47,7 +47,7 @@ export const signUp = async (newUser) => {
       auth,newUser.email, newUser.password
       );
       const user = userCredential.user;
-      const dbRef = doc(db, "users", user.uid);
+      const dbRef = doc(db, "users", (user || {}).uid);
       return await setDoc(dbRef, {
         name: newUser.name,
         isVerified: false,

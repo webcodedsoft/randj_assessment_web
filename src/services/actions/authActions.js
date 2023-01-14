@@ -45,7 +45,7 @@
 //           newUser.password
 //           );
 //       const user = userCredential.user;
-//       const dbRef = doc(db, "users", user.uid);
+//       const dbRef = doc(db, "users", (user || {}).uid);
 //       await setDoc(dbRef, {
 //         name: newUser.name,
 //         isVerified: false,

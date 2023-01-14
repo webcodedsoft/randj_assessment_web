@@ -12,7 +12,7 @@ export default function Dashboard() {
   const [user] = useAuthState(auth);
   
   const [value, loading] = useDocument(
-    doc(getFirestore(app), 'users', user && user.uid),
+    doc(getFirestore(app), 'users', user && (user || {}).uid),
     {
       snapshotListenOptions: { includeMetadataChanges: true },
     }

@@ -8,7 +8,7 @@ import SignedOutLinks from './SignedOutLinks'
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
 
-  const links = (!loading && user.uid) ? <SignedInLinks /> : <SignedOutLinks />;
+  const links = !loading && (user || {}).uid ? <SignedInLinks /> : <SignedOutLinks />;
 
   return (
     <nav className="nav-wrapper blue darken-3">
